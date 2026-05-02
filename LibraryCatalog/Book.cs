@@ -8,14 +8,14 @@ namespace LibraryCatalog
 {
     public class Book
     {
-    // 4. Private instance variables
+    // Private instance
         private string _isbn;
         private string _title;
         private string _author;
         private int _yearPublished;
         private int _copies;
 
-        // 5. Public properties with Encapsulation
+        // Public properties with Encapsulation
         public string ISBN
         {
             get { return _isbn; }
@@ -39,7 +39,7 @@ namespace LibraryCatalog
             get { return _yearPublished; }
             set
             {
-                // Rejects values below 1450 or above the current year
+                // not accepting values below 1450 or above the current year
                 int currentYear = DateTime.Now.Year;
                 if (value < 1450 || value > currentYear)
                     _yearPublished = 1450;
@@ -61,13 +61,13 @@ namespace LibraryCatalog
             }
         }
 
-        // Helper property to format the string for the ListBox
+        // format the string for the ListBox
         public string ListBoxDisplay
         {
             get { return $"{Title} {ISBN}"; }
         }
 
-        // 6. Default constructor (No-argument)
+        // Default constructor 
         public Book()
         {
             ISBN = "000-0000000000";
@@ -77,8 +77,8 @@ namespace LibraryCatalog
             Copies = 0;
         }
 
-        // 7. Partial overloaded constructor
-        // Chains to the default constructor to ensure Year and Copies get default values
+        // Partial overloaded constructor
+
         public Book(string isbn, string title, string author) : this()
         {
             ISBN = isbn;
@@ -86,17 +86,17 @@ namespace LibraryCatalog
             Author = author;
         }
 
-        // 8. Full overloaded constructor
+        // Full overloaded constructor
         public Book(string isbn, string title, string author, int yearPublished, int copies)
         {
             ISBN = isbn;
             Title = title;
             Author = author;
-            YearPublished = yearPublished; // Assigned through property to trigger validation
-            Copies = copies;               // Assigned through property to trigger validation
+            YearPublished = yearPublished; 
+            Copies = copies;               
         }
 
-        // 9. GetDetails() method
+        // 9. GetDetails method
         public string GetDetails()
         {
             return $"Title: {Title}\r\n" +
@@ -106,7 +106,7 @@ namespace LibraryCatalog
                    $"Copies Available: {Copies}";
         }
 
-        // 10. BorrowCopy() and ReturnCopy() methods
+        // BorrowCopy() and ReturnCopy() methods
         public bool BorrowCopy()
         {
             if (Copies > 0)
