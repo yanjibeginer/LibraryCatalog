@@ -23,7 +23,7 @@ namespace LibraryCatalog
             RefreshCatalogList();
         }
 
-        // Helper method to refresh the ListBox
+        //refresh the ListBox
         private void RefreshCatalogList()
         {
             lstBooks.DataSource = null;
@@ -31,7 +31,7 @@ namespace LibraryCatalog
             lstBooks.DisplayMember = "ListBoxDisplay";
         }
 
-        // 16, 21, 22. Add Book Logic
+        //add Book 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string isbn = txtISBN.Text.Trim();
@@ -40,7 +40,7 @@ namespace LibraryCatalog
             string yearInput = txtYear.Text.Trim();
             string copiesInput = txtCopies.Text.Trim();
 
-            // 21. Handle empty required fields
+            // empty required fields
             if (string.IsNullOrEmpty(isbn) || string.IsNullOrEmpty(title) || string.IsNullOrEmpty(author))
             {
                 MessageBox.Show("ISBN, Title, and Author are required.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -56,28 +56,28 @@ namespace LibraryCatalog
             }
             else
             {
-                // 22. Handle invalid year and copies input
+                //Handle if wrong year and copies input
                 if (!int.TryParse(yearInput, out int year) || !int.TryParse(copiesInput, out int copies))
                 {
                     MessageBox.Show("Year Published and Copies Available must be valid integers.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                newBook = new Book(isbn, title, author, year, copies); // Uses full constructor
+                newBook = new Book(isbn, title, author, year, copies); 
             }
 
             catalogList.Add(newBook);
             RefreshCatalogList();
-            btnClear_Click(sender, e); // Automatically clears fields after adding
+            btnClear_Click(sender, e); // clear after added
         }
 
-        // 18. ListBox selection event
+        //ListBox
         private void lstBooks_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshDetailsView();
         }
 
-        // Helper to update the Details text box
+        // update the Details text box
         private void RefreshDetailsView()
         {
             if (lstBooks.SelectedItem is Book selectedBook)
@@ -90,7 +90,7 @@ namespace LibraryCatalog
             }
         }
 
-        // 19. Borrow button logic
+        // Borrow button
         private void btnBorrow_Click(object sender, EventArgs e)
         {
             if (lstBooks.SelectedItem is Book selectedBook)
@@ -100,21 +100,21 @@ namespace LibraryCatalog
                 {
                     MessageBox.Show("No copies are available to borrow.", "Borrow Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                RefreshDetailsView(); // Reflect updated copies count
+                RefreshDetailsView(); 
             }
         }
 
-        // 19. Return button logic
+        //Return button 
         private void btnReturn_Click(object sender, EventArgs e)
         {
             if (lstBooks.SelectedItem is Book selectedBook)
             {
                 selectedBook.ReturnCopy();
-                RefreshDetailsView(); // Reflect updated copies count
+                RefreshDetailsView(); 
             }
         }
 
-        // 20. Clear Fields logic
+        // Clear Fields
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtISBN.Clear();
@@ -125,7 +125,7 @@ namespace LibraryCatalog
             txtISBN.Focus();
         }
 
-        // 20. Remove Book logic
+        // Remove Book 
         private void btnRemove_Click(object sender, EventArgs e)
         {
             if (lstBooks.SelectedItem is Book selectedBook)
